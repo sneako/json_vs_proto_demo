@@ -30,6 +30,7 @@ protomsg =
   JsonVsProtoDemo.Msg.new(input)
   |> JsonVsProtoDemo.Msg.encode()
 
+IO.puts "Erlang term_to_binary/1 size: #{:erlang.term_to_binary(input) |> byte_size()} bytes"
 IO.puts "Protobuf encoded size: #{byte_size(protomsg)} bytes"
 IO.puts "JSON encoded size: #{:jiffy.encode(input) |> byte_size()} bytes"
 
@@ -49,11 +50,17 @@ poison = fn ->
   |> Poison.decode()
 end
 
+term_to_binary = fn ->
+  :erlang.term_to_binary(input)
+  |> :erlang.binary_to_term()
+end
+
 Benchee.run(
   %{
     "protobuf" => fn -> protobuf.() end,
     "jiffy" => fn -> jiffy.() end,
-    "poison" => fn -> poison.() end
+    "poison" => fn -> poison.() end,
+    "term_to_binary" => fn -> term_to_binary.() end
   },
   parallel: 8
 )
