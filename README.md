@@ -1,5 +1,5 @@
 # JsonVsProtoDemo
-Super quick benchmark to compare serialization/deserialization performance between Protobuf and JSON in Elixir.
+Super quick/basic benchmark to compare serialization/deserialization performance between Protobuf and JSON in Elixir.
 
 Results on my machine:
 ```
