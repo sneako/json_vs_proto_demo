@@ -1,7 +1,8 @@
 # JsonVsProtoDemo
 Super quick benchmark to compare serialization/deserialization performance between Protobuf and JSON in Elixir.
 
-Results on my machine: ```
+Results on my machine:
+```
 Protobuf encoded size: 300
 JSON encoded size: 603
 Operating System: Linux
