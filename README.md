@@ -37,19 +37,6 @@ term_to_binary       92.07 K
 jiffy                15.62 K - 5.89x slower
 poison                7.64 K - 12.05x slower
 protobuf              4.75 K - 19.39x slower
-Operating System: Linux
-CPU Information: Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
-Number of Available Cores: 8
-Available memory: 15.52 GB
-Elixir 1.6.2
-Erlang 20.0
-Benchmark suite executing with the following configuration:
-warmup: 2 s
-time: 5 s
-parallel: 8
-inputs: none specified
-Estimated total run time: 21 s
-
 
 Benchmarking jiffy_decode...
 Benchmarking poison_decode...
@@ -64,19 +51,6 @@ Comparison:
 jiffy_decode          21.79 K
 poison_decode         14.03 K - 1.55x slower
 protobuf_decode       10.73 K - 2.03x slower
-Operating System: Linux
-CPU Information: Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
-Number of Available Cores: 8
-Available memory: 15.52 GB
-Elixir 1.6.2
-Erlang 20.0
-Benchmark suite executing with the following configuration:
-warmup: 2 s
-time: 5 s
-parallel: 8
-inputs: none specified
-Estimated total run time: 21 s
-
 
 Benchmarking jiffy_encode...
 Benchmarking poison_encode...
