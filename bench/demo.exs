@@ -26,13 +26,17 @@ input = %{
   version: "3.0.5-kh243k"
 }
 
-protomsg =
+proto_msg =
   JsonVsProtoDemo.Msg.new(input)
   |> JsonVsProtoDemo.Msg.encode()
 
-IO.puts "Erlang term_to_binary/1 size: #{:erlang.term_to_binary(input) |> byte_size()} bytes"
-IO.puts "Protobuf encoded size: #{byte_size(protomsg)} bytes"
-IO.puts "JSON encoded size: #{:jiffy.encode(input) |> byte_size()} bytes"
+json_msg = :jiffy.encode(input)
+
+t2b_msg = :erlang.term_to_binary(input)
+
+IO.puts "Erlang term_to_binary/1 size: #{byte_size(t2b_msg)} bytes"
+IO.puts "Protobuf encoded size: #{byte_size(proto_msg)} bytes"
+IO.puts "JSON encoded size: #{byte_size(json_msg)} bytes"
 
 protobuf = fn ->
   JsonVsProtoDemo.Msg.new(input)
@@ -60,7 +64,24 @@ Benchee.run(
     "protobuf" => fn -> protobuf.() end,
     "jiffy" => fn -> jiffy.() end,
     "poison" => fn -> poison.() end,
-    "term_to_binary" => fn -> term_to_binary.() end
+    "term_to_binary" => fn -> term_to_binary.() end,
+  },
+  parallel: 8
+)
+Benchee.run(
+  %{
+    "protobuf_decode" => fn -> JsonVsProtoDemo.Msg.decode(proto_msg) end,
+    "jiffy_decode" => fn -> :jiffy.decode(json_msg, [:return_maps]) end,
+    "poison_decode" => fn -> Poison.decode(json_msg) end,
+  },
+  parallel: 8
+)
+
+Benchee.run(
+  %{
+    "protobuf_encode" => fn -> JsonVsProtoDemo.Msg.new(input) |> JsonVsProtoDemo.Msg.encode() end,
+    "jiffy_encode" => fn -> :jiffy.encode(input) end,
+    "poison_encode" => fn -> Poison.encode!(input) end,
   },
   parallel: 8
 )
