@@ -1,0 +1,28 @@
+table Msg {
+  event:string (required);
+  event_time:string (required);
+  account_id:string;
+  auid:uint;
+  bid_request_id:string;
+  bundle:string;
+  context:string;
+  country_code:string;
+  creative_type:string;
+  cpm:float;
+  error:string;
+  impression:uint;
+  impression_id:string;
+  ip:string;
+  lang:string;
+  line_item_id:uint;
+  mcc:uint;
+  os_version:string;
+  rtt:float;
+  sample_rate:float;
+  screen_height:uint;
+  screen_width:uint;
+  uid:string;
+  user_agent:string;
+  version:string;
+}
+root_type Msg;

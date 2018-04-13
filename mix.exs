@@ -22,6 +22,7 @@ defmodule JsonVsProtoDemo.MixProject do
       {:exprotobuf, "~> 1.2"},
       {:jiffy, "~> 0.15.0"},
       {:poison, "~> 3.1"},
+      {:eflatbuffers, "~> 0.1.0"},
       {:benchee, "~> 0.12.1"}
     ]
   end
