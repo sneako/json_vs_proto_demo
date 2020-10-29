@@ -26,9 +26,11 @@ input = %{
   version: "3.0.5-kh243k"
 }
 
+protox_msg_struct = struct(ProtoxMsg, input)
 proto_msg =
-  JsonVsProtoDemo.Msg.new(input)
-  |> JsonVsProtoDemo.Msg.encode()
+  protox_msg_struct
+  |> Protox.Encode.encode!()
+  |> IO.iodata_to_binary()
 
 fb_schema =
   Path.join([__DIR__, "..", "priv", "flatbuffers.fbs"])
@@ -38,29 +40,40 @@ fb_schema =
 
 flatbuffer_msg = Eflatbuffers.write!(input, fb_schema)
 
-json_msg = :jiffy.encode(input)
+json_msg = Jason.encode!(input)
 
 t2b_msg = :erlang.term_to_binary(input)
+
+msgpax_msg = Msgpax.pack!(input) |> IO.iodata_to_binary()
 
 IO.puts "Erlang term_to_binary/1 size: #{byte_size(t2b_msg)} bytes"
 IO.puts "Protobuf encoded size: #{byte_size(proto_msg)} bytes"
 IO.puts "JSON encoded size: #{byte_size(json_msg)} bytes"
 IO.puts "Flatbuffers encoded size: #{byte_size(flatbuffer_msg)} bytes"
+IO.puts "MessagePack encoded size: #{byte_size(msgpax_msg)} bytes"
 
 protobuf = fn ->
-  JsonVsProtoDemo.Msg.new(input)
-  |> JsonVsProtoDemo.Msg.encode()
-  |> JsonVsProtoDemo.Msg.decode()
+  protox_msg_struct
+  |> Protox.Encode.encode!()
+  |> IO.iodata_to_binary()
+  |> ProtoxMsg.decode!()
 end
 
-jiffy = fn ->
-  :jiffy.encode(input)
-  |> :jiffy.decode([:return_maps])
+msgpax = fn ->
+  input
+  |> Msgpax.pack!()
+  |> Msgpax.unpack!()
 end
 
 poison = fn ->
   Poison.encode!(input)
   |> Poison.decode()
+end
+
+jason = fn ->
+  input
+  |> Jason.encode!()
+  |> Jason.decode!()
 end
 
 term_to_binary = fn ->
@@ -78,7 +91,8 @@ end
 Benchee.run(
   %{
     "protobuf" => fn -> protobuf.() end,
-    "jiffy" => fn -> jiffy.() end,
+    "msgpax" => fn -> msgpax.() end,
+    "jason" => fn -> jason.() end,
     "poison" => fn -> poison.() end,
     "flatbuffers" => fn -> flatbuffers.() end,
     "term_to_binary" => fn -> term_to_binary.() end
@@ -87,8 +101,9 @@ Benchee.run(
 )
 Benchee.run(
   %{
-    "protobuf_decode" => fn -> JsonVsProtoDemo.Msg.decode(proto_msg) end,
-    "jiffy_decode" => fn -> :jiffy.decode(json_msg, [:return_maps]) end,
+    "protobuf_decode" => fn -> ProtoxMsg.decode(proto_msg) end,
+    "msgpax_decode" => fn -> Msgpax.unpack!(msgpax_msg) end,
+    "jason_decode" => fn -> Jason.decode(json_msg) end,
     "poison_decode" => fn -> Poison.decode(json_msg) end,
     "flatbuffers_decode" => fn -> Eflatbuffers.read!(flatbuffer_msg, fb_schema) end
   },
@@ -97,8 +112,9 @@ Benchee.run(
 
 Benchee.run(
   %{
-    "protobuf_encode" => fn -> JsonVsProtoDemo.Msg.new(input) |> JsonVsProtoDemo.Msg.encode() end,
-    "jiffy_encode" => fn -> :jiffy.encode(input) end,
+    "protobuf_encode" => fn -> Protox.Encode.encode!(protox_msg_struct) |> IO.iodata_to_binary() end,
+    "msgpax_encode" => fn -> Msgpax.pack!(input) end,
+    "jason_encode" => fn -> Jason.encode(input) end,
     "poison_encode" => fn -> Poison.encode!(input) end,
     "flatbuffers_encode" => fn -> Eflatbuffers.write!(input, fb_schema) end
   },
