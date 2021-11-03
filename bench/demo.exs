@@ -166,7 +166,7 @@ Benchee.run(
     "avro_encode" => fn ->
       avro_encoder.(input) |> IO.iodata_to_binary()
     end,
-    "tony_proto" => fn ->
+    "tony_proto encode" => fn ->
       input
       |> TonyProto.new()
       |> TonyProto.encode()

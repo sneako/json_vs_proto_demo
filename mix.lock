@@ -1,7 +1,8 @@
 %{
   "bare": {:hex, :bare, "0.1.1", "d9dc757cdf6a4f236055d7d098b523fcc70ff7e805a981e3e82786c7a99725b9", [:rebar3], [], "hexpm", "07797a39167e37108c0827fe1a686e69d5f27d7b658fb64f14496a6db72a2415"},
-  "benchee": {:hex, :benchee, "0.12.1", "1286a79bab2f1899220134daf9a695586af00ea71968e6cd89d3d3afdf7cecba", [:mix], [{:deep_merge, "~> 0.1", [hex: :deep_merge, repo: "hexpm", optional: false]}], "hexpm", "2a1577860a01e4c81e72e4a89c5e378162098ba200109267d31c769a8ec82705"},
-  "deep_merge": {:hex, :deep_merge, "0.2.0", "c1050fa2edf4848b9f556fba1b75afc66608a4219659e3311d9c9427b5b680b3", [:mix], [], "hexpm", "e3bf435a54ed27b0ba3a01eb117ae017988804e136edcbe8a6a14c310daa966e"},
+  "benchee": {:hex, :benchee, "1.0.1", "66b211f9bfd84bd97e6d1beaddf8fc2312aaabe192f776e8931cb0c16f53a521", [:mix], [{:deep_merge, "~> 1.0", [hex: :deep_merge, repo: "hexpm", optional: false]}], "hexpm", "3ad58ae787e9c7c94dd7ceda3b587ec2c64604563e049b2a0e8baafae832addb"},
+  "decimal": {:hex, :decimal, "2.0.0", "a78296e617b0f5dd4c6caf57c714431347912ffb1d0842e998e9792b5642d697", [:mix], [], "hexpm", "34666e9c55dea81013e77d9d87370fe6cb6291d1ef32f46a1600230b1d44f577"},
+  "deep_merge": {:hex, :deep_merge, "1.0.0", "b4aa1a0d1acac393bdf38b2291af38cb1d4a52806cf7a4906f718e1feb5ee961", [:mix], [], "hexpm", "ce708e5f094b9cd4e8f2be4f00d2f4250c4095be93f8cd6d018c753894885430"},
   "eflatbuffers": {:hex, :eflatbuffers, "0.1.0", "8bd969160ee49af4aa06ee0501b20816c98ab5cf88413fa78154a5a209235180", [:mix], [], "hexpm", "31e6ecbbd56b68d03b8367d0642cb4a0c2d235b3248ae007c466244becef662e"},
   "erlavro": {:hex, :erlavro, "2.9.3", "673fd6c131cc39de36858648efd544e7958c5aea8ba18e278fc682502aae39e2", [:make, :rebar, :rebar3], [{:jsone, "1.4.6", [hex: :jsone, repo: "hexpm", optional: false]}], "hexpm", "4b02a8ddfa4ef84a23c0d216cfb60c54b6a7f0d1040ac9c92dff3f6485a7fb9f"},
   "exprotobuf": {:hex, :exprotobuf, "1.2.17", "3003937da617f588a8fb63ebdd7b127a18d78d6502623c272076fd54c07c4de1", [:mix], [{:gpb, "~> 4.0", [hex: :gpb, repo: "hexpm", optional: false]}], "hexpm", "e07ec1e5ae6f8c1c8521450d5f6b658c8c700b1f34c70356e91ece0766f4361a"},
@@ -11,6 +12,6 @@
   "jsone": {:hex, :jsone, "1.4.6", "644d6d57befb22c8e19b324dee19d73b1c004565009861a8f64c68b7b9e64dbf", [:rebar3], [], "hexpm", "78eee8bb38f0bee2e73673d71bc75fc6fb01f56f0d23e769a26eee3655487a38"},
   "msgpax": {:hex, :msgpax, "2.3.0", "14f52ad249a3f77b5e2d59f6143e6c18a6e74f34666989e22bac0a465f9835cc", [:mix], [{:plug, "~> 1.0", [hex: :plug, repo: "hexpm", optional: true]}], "hexpm", "65c36846a62ed5615baf7d7d47babb6541313a6c0b6d2ff19354bd518f52df7e"},
   "poison": {:hex, :poison, "3.1.0", "d9eb636610e096f86f25d9a46f35a9facac35609a7591b3be3326e99a0484665", [:mix], [], "hexpm", "fec8660eb7733ee4117b85f55799fd3833eb769a6df71ccf8903e8dc5447cfce"},
-  "protobuf": {:hex, :protobuf, "0.7.1", "7d1b9f7d9ecb32eccd96b0c58572de4d1c09e9e3bc414e4cb15c2dce7013f195", [:mix], [], "hexpm", "6eff7a5287963719521c82e5d5b4583fd1d7cdd89ad129f0ea7d503a50a4d13f"},
-  "protox": {:hex, :protox, "1.3.2", "4d4cf313e93a46982933f9ce6fffe455ec0370e3ea50a382144cb82349c23426", [:mix], [], "hexpm", "6759cd5fed26a05c7deb51558023b588cc946c9cb2fbd5f7b5dc1832153815ca"},
+  "protobuf": {:hex, :protobuf, "0.8.0", "61b27d6fd50e7b1b2eb0ee17c1f639906121f4ef965ae0994644eb4c68d4647d", [:mix], [{:jason, "~> 1.2", [hex: :jason, repo: "hexpm", optional: true]}], "hexpm", "3644ed846fd6f5e3b5c2cd617aa8344641e230edf812a45365fee7622bccd25a"},
+  "protox": {:hex, :protox, "1.6.4", "ff8c330338204104a36eaac5c31724e6603bfe46aba5533860178f803c44f449", [:mix], [{:decimal, "~> 2.0", [hex: :decimal, repo: "hexpm", optional: false]}, {:jason, "~> 1.2", [hex: :jason, repo: "hexpm", optional: true]}], "hexpm", "d06191580ecbee0305d9f7b01746b2cd977945106aedcdd38201ad5ff2f378be"},
 }

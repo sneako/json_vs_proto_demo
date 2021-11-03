@@ -2,6 +2,49 @@
 Super quick/basic benchmark to compare serialization/deserialization performance between Protobuf and JSON in Elixir.
 
 Results on my machine:
+2021-11-03
+```
+Operating System: Linux
+CPU Information: Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+Number of Available Cores: 8
+Available memory: 15.47 GB
+Elixir 1.13.0-rc.0
+Erlang 24.1.4
+
+Benchmark suite executing with the following configuration:
+warmup: 2 s
+time: 5 s
+memory time: 0 ns
+parallel: 8
+inputs: none specified
+Estimated total run time: 42 s
+
+Benchmarking avro_encode...
+Benchmarking flatbuffers_encode...
+Benchmarking jason_encode...
+Benchmarking msgpax_encode...
+Benchmarking protox encode...
+Benchmarking tony_proto...
+
+Name                         ips        average  deviation         median         99th %
+protox encode           139.93 K        7.15 μs   ±462.56%        6.02 μs       16.56 μs
+msgpax_encode           130.87 K        7.64 μs   ±421.54%        6.50 μs       20.56 μs
+flatbuffers_encode       88.84 K       11.26 μs   ±203.78%       10.17 μs       26.01 μs
+tony_proto               54.06 K       18.50 μs   ±182.89%       16.68 μs       64.68 μs
+jason_encode             47.61 K       21.01 μs   ±207.89%       19.87 μs       34.48 μs
+avro_encode              24.69 K       40.50 μs   ±114.49%       38.56 μs       56.95 μs
+
+Comparison:
+protox encode           139.93 K
+msgpax_encode           130.87 K - 1.07x slower +0.49 μs
+flatbuffers_encode       88.84 K - 1.58x slower +4.11 μs
+tony_proto               54.06 K - 2.59x slower +11.35 μs
+jason_encode             47.61 K - 2.94x slower +13.86 μs
+avro_encode              24.69 K - 5.67x slower +33.36 μs
+```
+
+
+Original:
 ```
 Erlang term_to_binary/1 size: 647 bytes
 Protobuf encoded size: 300 bytes
